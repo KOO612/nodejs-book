@@ -1,6 +1,6 @@
-const EventEmitter = require('events');
+const events = require('events');
 
-const myEvent = new EventEmitter();
+const myEvent = new events();
 myEvent.addListener('event1', () => {
   console.log('이벤트1');
 });
@@ -24,6 +24,10 @@ myEvent.on('event4', () => {
   console.log('이벤트 4');
 });
 
+myEvent.on('event4', () => {
+  console.log('이벤트 4');
+});
+
 myEvent.removeAllListeners('event4');
 myEvent.emit('event4');
 
@@ -31,7 +35,10 @@ const listener = () => {
   console.log('이벤트 5');
 };
 myEvent.on('event5', listener);
+myEvent.on('event5', listener);
 myEvent.removeListener('event5', listener);
 myEvent.emit('event5');
 
 console.log(myEvent.listenerCount('event2'));
+console.log(myEvent.listenerCount('event4'));
+console.log(myEvent.listenerCount('event5'));
